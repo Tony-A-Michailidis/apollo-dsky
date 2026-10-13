@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apollo-dsky"
+version = "0.1.0"
+description = "Apollo DSKY simulator: keyboard/display state machine, a simulated Luminary-style AGC, and a web panel"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[project.scripts]
+dsky = "dsky.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["dsky*"]
+
+[tool.setuptools.package-data]
+dsky = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

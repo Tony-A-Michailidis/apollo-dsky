@@ -1,0 +1,5 @@
+{
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["tests"],
+  "files.exclude": { "**/__pycache__": true, "**/*.egg-info": true }
+}

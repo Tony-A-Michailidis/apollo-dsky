@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "DSKY web interface",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "dsky",
+      "args": ["--port", "8000"],
+      "console": "integratedTerminal"
+    }
+  ]
+}

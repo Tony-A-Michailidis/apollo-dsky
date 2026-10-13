@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSKY</title>
+<link rel="stylesheet" href="/static/dsky.css">
+</head>
+<body>
+<header class="bar">
+  <span class="title">DSKY <span class="sub">LM Luminary (simulated)</span></span>
+  <span class="spacer"></span>
+  <span id="pending" class="pending"></span>
+  <span id="conn" class="conn">connecting</span>
+  <span id="get" class="get">000:00:00</span>
+</header>
+
+<main class="layout">
+  <section class="panel-col">
+    <div class="dsky">
+      <div class="lamps" id="lamps"></div>
+      <div class="els">
+        <div class="els-top">
+          <div class="lamp-comp" id="comp-acty"><span>COMP<br>ACTY</span></div>
+          <div class="field right">
+            <div class="label">PROG</div>
+            <div class="digits two" id="prog"></div>
+          </div>
+        </div>
+        <div class="els-vn">
+          <div class="field">
+            <div class="label">VERB</div>
+            <div class="digits two" id="verb"></div>
+          </div>
+          <div class="field">
+            <div class="label">NOUN</div>
+            <div class="digits two" id="noun"></div>
+          </div>
+        </div>
+        <div class="rule"></div>
+        <div class="reg" id="r1"></div>
+        <div class="rule"></div>
+        <div class="reg" id="r2"></div>
+        <div class="rule"></div>
+        <div class="reg" id="r3"></div>
+      </div>
+    </div>
+    <div class="keyboard" id="keyboard"></div>
+    <p class="hint">Keyboard: <kbd>V</kbd> <kbd>N</kbd> digits <kbd>+</kbd> <kbd>-</kbd> <kbd>Enter</kbd>=ENTR
+      <kbd>Backspace</kbd>=CLR <kbd>P</kbd>=PRO <kbd>K</kbd>=KEY REL <kbd>R</kbd>=RSET</p>
+  </section>
+
+  <aside class="side">
+    <section class="card">
+      <h2>Computer</h2>
+      <div class="grid" id="computer"></div>
+    </section>
+
+    <section class="card">
+      <h2>Vehicle (truth, not visible to the crew)</h2>
+      <div class="grid" id="vehicle"></div>
+      <div class="contact" id="contact">LUNAR CONTACT</div>
+    </section>
+
+    <section class="card">
+      <h2>Switches and hand controllers</h2>
+      <div class="controls">
+        <div class="row">
+          <span class="lbl">RNDZ RADAR</span>
+          <div class="seg3" id="rr">
+            <button data-rr="SLEW">SLEW</button>
+            <button data-rr="AUTO">AUTO TRACK</button>
+            <button data-rr="LGC">LGC</button>
+          </div>
+        </div>
+        <div class="row">
+          <span class="lbl">ROD (P66)</span>
+          <button data-sim='{"rod": -1}'>&minus;1 ft/s</button>
+          <button data-sim='{"rod": 1}'>+1 ft/s</button>
+          <span class="note">first click in P64/P65 enters P66</span>
+        </div>
+        <div class="row">
+          <span class="lbl">LPD (P64)</span>
+          <button data-sim='{"lpd": -1}'>short</button>
+          <button data-sim='{"lpd": 1}'>long</button>
+        </div>
+        <div class="row">
+          <span class="lbl">ENGINE</span>
+          <button class="danger" data-sim='{"engine_stop": true}'>ENGINE STOP</button>
+          <button class="danger" data-sim='{"abort": true}'>ABORT</button>
+          <button class="danger" data-sim='{"abort_stage": true}'>ABORT STAGE</button>
+        </div>
+        <div class="row">
+          <span class="lbl">SIM</span>
+          <button data-sim='{"rate": 1}'>1x</button>
+          <button data-sim='{"rate": 4}'>4x</button>
+          <button data-sim='{"rate": 8}'>8x</button>
+          <button id="pause">pause</button>
+          <button data-sim='{"reset": true}'>reset</button>
+        </div>
+        <div class="row">
+          <span class="lbl">UPLINK</span>
+          <input id="uplink" placeholder="V16N68E" spellcheck="false">
+          <button id="uplink-send">send</button>
+          <span class="note">keys injected from the ground, lights UPLINK ACTY</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Alarms</h2>
+      <div id="alarms" class="alarms">none</div>
+    </section>
+
+    <section class="card">
+      <h2>Events</h2>
+      <div id="events" class="events"></div>
+    </section>
+
+    <section class="card">
+      <details>
+        <summary>Cue card: powered descent</summary>
+        <ol class="cue">
+          <li><b>V37E63E</b> braking phase. FL V06N61: time to go, time from ignition, crossrange. <b>PRO</b>.</li>
+          <li>At TIG&minus;35 s the display blanks (average-G on). At TIG&minus;30 s <b>FL V99N62</b>: engine ignition enable. <b>PRO</b> before TIG.</li>
+          <li>Ignition at 10%, throttle-up at TIG+26 s. Program shows V06N62. Key <b>V16N68E</b> to monitor range, time to go and LR delta-H.</li>
+          <li>Below 40,000 ft the landing radar locks. Check N68 R3 (LR minus computed altitude), then <b>V57E</b> to let the computer use it.</li>
+          <li>Put the rendezvous radar in <b>AUTO TRACK</b> if you want the Apollo 11 1202 alarms. On an alarm: <b>V05N09E</b> reads the codes, <b>RSET</b> clears the lamp, <b>KEY REL</b> returns the program display.</li>
+          <li>P64 comes automatically at high gate: N64 shows time to go, LPD angle, altitude rate, altitude. LPD clicks move the site.</li>
+          <li>Take over with a <b>ROD</b> click (P66). Hold about &minus;3 ft/s below 200 ft. <b>LUNAR CONTACT</b>, then <b>ENGINE STOP</b>.</li>
+          <li>P68 confirms the landing: FL V06N43 latitude, longitude, altitude. <b>PRO</b>.</li>
+        </ol>
+        <p class="cue-more">Other things to try: <b>V35E</b> lamp test, <b>V16N36E</b> the clock, <b>V37E52E</b> IMU realign, <b>V37E06E</b> standby,
+          <b>V01N01E 00025E</b> peek at TIME1, <b>V25N69E</b> landing site correction, <b>V69E</b> restart, <b>V36E</b> fresh start.</p>
+      </details>
+    </section>
+  </aside>
+</main>
+<script src="/static/dsky.js"></script>
+</body>
+</html>
