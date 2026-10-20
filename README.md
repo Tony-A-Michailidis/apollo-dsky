@@ -20,7 +20,7 @@ Python 3.11 or newer. On this machine Python lives in WSL, so:
 
 ```bash
 python3 -m venv ~/venvs/apollo-dsky && source ~/venvs/apollo-dsky/bin/activate
-cd /mnt/c/Users/tonym/Downloads/apollo-dsky
+cd <your folder>/apollo-dsky
 pip install -e ".[dev]"
 dsky                      # or: python -m dsky --port 8000
 ```
