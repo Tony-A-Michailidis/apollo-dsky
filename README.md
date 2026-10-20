@@ -33,6 +33,8 @@ python tools/trace_descent.py --rr AUTO  # with the Apollo 11 executive overflow
 pytest                                   # 33 tests
 ```
 
+To set up the panel for a screenshot, see [SCREENSHOT.md](SCREENSHOT.md).
+
 ## Fly the landing
 
 The sim starts at 102:30:00 GET, three minutes before the Apollo 11 PDI, with the LM in P00.
