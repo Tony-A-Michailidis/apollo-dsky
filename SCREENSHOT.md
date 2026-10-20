@@ -9,7 +9,7 @@ In a WSL terminal:
 
 ```bash
 source ~/venvs/apollo-dsky/bin/activate
-cd /mnt/c/Users/tonym/Downloads/apollo-dsky
+cd <your folder>/apollo-dsky
 dsky
 ```
 
